@@ -17,8 +17,8 @@ export async function getServices(): Promise<Service[]> {
       .depth(1);
     
     return response.objects as Service[];
-  } catch (error) {
-    if (error.status === 404) {
+  } catch (error: unknown) {
+    if (error && typeof error === 'object' && 'status' in error && error.status === 404) {
       return [];
     }
     console.error('Error fetching services:', error);
@@ -34,8 +34,8 @@ export async function getService(slug: string): Promise<Service | null> {
     }).depth(1);
     
     return response.object as Service;
-  } catch (error) {
-    if (error.status === 404) {
+  } catch (error: unknown) {
+    if (error && typeof error === 'object' && 'status' in error && error.status === 404) {
       return null;
     }
     console.error('Error fetching service:', error);
@@ -52,8 +52,8 @@ export async function getTeamMembers(): Promise<TeamMember[]> {
       .depth(1);
     
     return response.objects as TeamMember[];
-  } catch (error) {
-    if (error.status === 404) {
+  } catch (error: unknown) {
+    if (error && typeof error === 'object' && 'status' in error && error.status === 404) {
       return [];
     }
     console.error('Error fetching team members:', error);
@@ -70,8 +70,8 @@ export async function getTestimonials(): Promise<Testimonial[]> {
       .depth(1);
     
     return response.objects as Testimonial[];
-  } catch (error) {
-    if (error.status === 404) {
+  } catch (error: unknown) {
+    if (error && typeof error === 'object' && 'status' in error && error.status === 404) {
       return [];
     }
     console.error('Error fetching testimonials:', error);
@@ -88,8 +88,8 @@ export async function getCaseStudies(): Promise<CaseStudy[]> {
       .depth(1);
     
     return response.objects as CaseStudy[];
-  } catch (error) {
-    if (error.status === 404) {
+  } catch (error: unknown) {
+    if (error && typeof error === 'object' && 'status' in error && error.status === 404) {
       return [];
     }
     console.error('Error fetching case studies:', error);
@@ -105,8 +105,8 @@ export async function getCaseStudy(slug: string): Promise<CaseStudy | null> {
     }).depth(1);
     
     return response.object as CaseStudy;
-  } catch (error) {
-    if (error.status === 404) {
+  } catch (error: unknown) {
+    if (error && typeof error === 'object' && 'status' in error && error.status === 404) {
       return null;
     }
     console.error('Error fetching case study:', error);
